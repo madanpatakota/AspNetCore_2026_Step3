@@ -10,13 +10,28 @@ namespace Step3.Controllers
     [Route("api/[Controller]")]
     public class EmployeeController : ControllerBase
     {
+        IEmployeeService service;
+
+        public EmployeeController(IEmployeeService _service)
+        {  //_service  (instance of the EmployeeService) 
+
+            //service = new EmployeeService();// Problem of this code... 
+
+            service = _service;
+
+            //1.problem of code  
+
+            //what if i am goign the assign this work to the asp.ent core so then i can reduce my headache
+            //2. i want to assign this work new EmployeeService() to the asp.net core
+
+        }
+
         [HttpGet]
         [Route("GetEmployees")]
         public async Task<IActionResult> GetEmployees()
         {
-            IEmployeeService employeeService = new EmployeeService();
             //var Data = employeeService.GetEmployees();
-            List<Employee> Data = employeeService.GetEmployees().ToList();
+            List<Employee> Data = service.GetEmployees().ToList();
             return Ok(Data);
         }
 
@@ -25,7 +40,7 @@ namespace Step3.Controllers
         [Route("GetEmployeeById/{id}")]
         public IActionResult GetEmployeeById(int id)
         {
-            IEmployeeService service = new EmployeeService();
+            //IEmployeeService service = new EmployeeService();
 
             var data = service.GetEmployeeById(id);
 
@@ -39,7 +54,7 @@ namespace Step3.Controllers
         [Route("CreateEmployee")]
         public IActionResult CreateEmployee([FromBody] Employee employee)
         {
-            IEmployeeService service = new EmployeeService();
+            //IEmployeeService service = new EmployeeService();
 
             var data = service.CreateEmployee(employee);
 
@@ -51,7 +66,7 @@ namespace Step3.Controllers
         [Route("UpdateEmployee/{id}")]
         public IActionResult UpdateEmployee(int id, [FromBody] Employee employee)
         {
-            IEmployeeService service = new EmployeeService();
+           // IEmployeeService service = new EmployeeService();
 
             var data = service.UpdateEmployee(id, employee);
 
@@ -66,7 +81,7 @@ namespace Step3.Controllers
         [Route("DeleteEmployee/{id}")]
         public IActionResult DeleteEmployee(int id)
         {
-            IEmployeeService service = new EmployeeService();
+            //IEmployeeService service = new EmployeeService();
 
             bool result = service.DeleteEmployee(id);
 
