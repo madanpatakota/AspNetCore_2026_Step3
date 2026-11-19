@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Step3.Services;
 using Step3.Models;
+using Step3.Interfaces;
 
 namespace Step3.Controllers
 {
@@ -13,7 +14,7 @@ namespace Step3.Controllers
         [Route("GetEmployees")]
         public async Task<IActionResult> GetEmployees()
         {
-            EmployeeService employeeService = new EmployeeService();
+            IEmployeeService employeeService = new EmployeeService();
             //var Data = employeeService.GetEmployees();
             List<Employee> Data = employeeService.GetEmployees().ToList();
             return Ok(Data);

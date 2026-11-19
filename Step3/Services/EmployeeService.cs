@@ -1,8 +1,9 @@
-﻿using Step3.Models;
+﻿using Step3.Interfaces;
+using Step3.Models;
 
 namespace Step3.Services
 {
-    public class EmployeeService
+    public class EmployeeService : IEmployeeService
     {
 
         public List<Employee> GetEmployees()
