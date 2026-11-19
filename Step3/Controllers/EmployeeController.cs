@@ -10,25 +10,25 @@ namespace Step3.Controllers
     [Route("api/[Controller]")]
     public class EmployeeController : ControllerBase
     {
-        IEmployeeService service;
+        //IEmployeeService service;
 
-        public EmployeeController(IEmployeeService _service)
-        {  //_service  (instance of the EmployeeService) 
+        //public EmployeeController(IEmployeeService _service)
+        //{  //_service  (instance of the EmployeeService) 
 
-            //service = new EmployeeService();// Problem of this code... 
+        //    //service = new EmployeeService();// Problem of this code... 
 
-            service = _service;
+        //    service = _service;
 
-            //1.problem of code  
+        //    //1.problem of code  
 
-            //what if i am goign the assign this work to the asp.ent core so then i can reduce my headache
-            //2. i want to assign this work new EmployeeService() to the asp.net core
+        //    //what if i am goign the assign this work to the asp.ent core so then i can reduce my headache
+        //    //2. i want to assign this work new EmployeeService() to the asp.net core
 
-        }
-
+        //}
+        
         [HttpGet]
         [Route("GetEmployees")]
-        public async Task<IActionResult> GetEmployees()
+        public async Task<IActionResult> GetEmployees([FromServices] IEmployeeService service)
         {
             //var Data = employeeService.GetEmployees();
             List<Employee> Data = service.GetEmployees().ToList();
@@ -38,7 +38,7 @@ namespace Step3.Controllers
 
         [HttpGet]
         [Route("GetEmployeeById/{id}")]
-        public IActionResult GetEmployeeById(int id)
+        public IActionResult GetEmployeeById(int id , [FromServices] IEmployeeService service)
         {
             //IEmployeeService service = new EmployeeService();
 
@@ -52,7 +52,7 @@ namespace Step3.Controllers
 
         [HttpPost]
         [Route("CreateEmployee")]
-        public IActionResult CreateEmployee([FromBody] Employee employee)
+        public IActionResult CreateEmployee([FromBody] Employee employee , [FromServices] IEmployeeService service)
         {
             //IEmployeeService service = new EmployeeService();
 
@@ -64,7 +64,7 @@ namespace Step3.Controllers
 
         [HttpPut]
         [Route("UpdateEmployee/{id}")]
-        public IActionResult UpdateEmployee(int id, [FromBody] Employee employee)
+        public IActionResult UpdateEmployee(int id, [FromBody] Employee employee , [FromServices] IEmployeeService service)
         {
            // IEmployeeService service = new EmployeeService();
 
@@ -79,7 +79,7 @@ namespace Step3.Controllers
 
         [HttpDelete]
         [Route("DeleteEmployee/{id}")]
-        public IActionResult DeleteEmployee(int id)
+        public IActionResult DeleteEmployee(int id , [FromServices] IEmployeeService service)
         {
             //IEmployeeService service = new EmployeeService();
 
